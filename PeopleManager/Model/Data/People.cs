@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PeopleManager.Model.Data
 {
-    class People
+    public class People
     {
         [JsonProperty("@odata.context")]
         public string OdataContext
