@@ -38,6 +38,9 @@ namespace PeopleManager
                     case ConsoleKey.D3:
                         ShowOnePersonDetails(peopleModel);
                         break;
+                    case ConsoleKey.D4:
+                        ModifyPersonDetails(peopleModel);
+                        break;
                     default:
                         Console.WriteLine($"The key {consoleKeyInfo.Key} does not belong to a valid option.");
                         break;
@@ -57,7 +60,35 @@ namespace PeopleManager
             Console.WriteLine("1.- Show all persons");
             Console.WriteLine("2.- Filter people.");
             Console.WriteLine("3.- Show person details.");
+            Console.WriteLine("4.- Modify data of one person.");
             Console.WriteLine("\n");
+        }
+
+        /// <summary>
+        /// Modifies the details of one person after the user provides its full name.
+        /// </summary>
+        /// <param name="peopleModel">The people model to get the person from the OData API.</param>
+        private static void ModifyPersonDetails(IPeopleModel peopleModel)
+        {
+            Console.WriteLine("Write down the user name of the person (e.g. ronaldmundy): \n");
+            string userName = Console.ReadLine();
+
+            Console.WriteLine("Write down the fields that you want to modify, separate by spaces (e.g. FirstName LastName Gender): \n");
+            string[] fields = Console.ReadLine().Split(' ');
+            
+            Console.WriteLine("Write down the new values for the previous specified fields, separate by spaces (e.g. Leon Kennedy Female): \n");
+            string[] newValues = Console.ReadLine().Split(' ');
+
+            try
+            {
+                
+                peopleModel.ModifySinglePerson(userName, fields, newValues);
+                Console.WriteLine("Modification successful.");
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine("Invalid request. Try again.");
+            }
         }
 
         /// <summary>

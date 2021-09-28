@@ -25,5 +25,13 @@
         /// <param name="fullName">The full name of the desired person.</param>
         /// <returns>An string representing a person.</returns>
         string GetSinglePerson (string[] fullName);
+
+        /// <summary>
+        /// Modifies the data of a single person.
+        /// </summary>
+        /// <param name="userName">The user name of the person to modify.</param>
+        /// <param name="fields">The fields that the user want to modify.</param>
+        /// <param name="newValues">The new desired values for the specified fields.</param>
+        void ModifySinglePerson(string userName, string[] fields, string[] newValues);
     }
 }
